@@ -14,50 +14,25 @@
 
 <title>Test for visualizing CoNLL-U files</title>
 
-<script src="conllu-vis_files/jquery-1.11.3/jquery.min.js"></script>
+<script src="lib/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="conllu-vis_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="conllu-vis_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="conllu-vis_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="conllu-vis_files/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="conllu-vis_files/navigation-1.1/tabsets.js"></script>
-<link href="conllu-vis_files/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="conllu-vis_files/highlightjs-1.1/highlight.js"></script>
-    <meta charset="utf-8">
+<link href="lib/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="lib/navigation-1.1/tabsets.js"></script>
+<link href="lib/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="lib/highlightjs-1.1/highlight.js"></script>
 
-    <link rel="stylesheet" href="css/jquery-ui-redmond.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/style-vis.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Tree visualization</title>
 
-    <script type="text/javascript" src="lib/ext/head.load.min.js"></script>
-
-    <!-- External libraries -->
-    <script type="text/javascript" src="lib/ext/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/ext/jquery.svg.min.js"></script>
-    <script type="text/javascript" src="lib/ext/jquery.svgdom.min.js"></script>
-    <script type="text/javascript" src="lib/ext/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="lib/ext/waypoints.min.js"></script>
-
-    <!-- brat helper modules -->
-    <script type="text/javascript" src="lib/brat/configuration.js"></script>
-    <script type="text/javascript" src="lib/brat/util.js"></script>
-    <script type="text/javascript" src="lib/brat/annotation_log.js"></script>
-    <script type="text/javascript" src="lib/ext/webfont.js"></script>
-
-    <!-- brat modules -->
-    <script type="text/javascript" src="lib/brat/dispatcher.js"></script>
-    <script type="text/javascript" src="lib/brat/url_monitor.js"></script>
-    <script type="text/javascript" src="lib/brat/visualizer.js"></script>
-
-    <!-- annotation documentation support -->
-    <script type="text/javascript" src="lib/local/annodoc.js"></script>
-    <script type="text/javascript" src="lib/local/config.js"></script>
-
-    <!-- the conllu.js library itself -->
-    <script type="text/javascript" src="conllu.js"></script>
-
-    <script src="head.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui-redmond.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style-vis.css"/>
+    <script type="text/javascript" src="head.load.min.js"></script>
+<!--     <link rel="shortcut icon" href="favicon.ico"/> -->
+  
     <!-- Leipzig.js -->
 
     <!-- CSS 
@@ -165,6 +140,7 @@ $(document).ready(function () {
 </div>
 
 
+<h2 id="section"></h2>
 <div class="conllu-parse" tabs="yes">1	А	а	SCONJ	_	_	5	mark
 2	сэсся	сэсся	ADV	_	_	4	advmod
 3	пыр	пыр	ADV	_	_	4	advmod
@@ -174,22 +150,100 @@ $(document).ready(function () {
 </div>
 
 <script type="text/javascript">
-  head.js(
-  );
+    // TODO pull this stuff from a more reasonable location
+    var root = 'https://nikopartanen.github.io/conllu-vis/';
+    head.js(
+        // External libraries
+        root + 'lib/ext/jquery.min.js',
+        root + 'lib/ext/jquery.svg.min.js',
+        root + 'lib/ext/jquery.svgdom.min.js',
+        root + 'lib/ext/jquery-ui.min.js',
+        root + 'lib/ext/waypoints.min.js',
 
-var webFontURLs = [
-  'static/fonts/PT_Sans-Caption-Web-Regular.ttf',
-  'static/fonts/Liberation_Sans-Regular.ttf'
-  ];
+        // brat helper modules
+        root + 'lib/brat/configuration.js',
+        root + 'lib/brat/util.js',
+        root + 'lib/brat/annotation_log.js',
+        root + 'lib/ext/webfont.js',
+        // brat modules
+        root + 'lib/brat/dispatcher.js',
+        root + 'lib/brat/url_monitor.js',
+        root + 'lib/brat/visualizer.js',
 
-/* not used here */
-  var documentCollections = {};
+        // embedding support modules
+        'https://nikopartanen.github.io/conllu-vis/lib/local/annodoc.js',
+	root + 'conllu.js'
+	//root + 'lib/local/config.js'
+    );
 
-  head.ready(function() {
-    // performes all embedding and support functions
-    Annodoc.activate(Config.bratCollData, documentCollections);
-  });
-  </script>
+
+    var bratCollData = {
+	'entity_types': [
+// this is optional
+        {
+            'type': 'SPAN_DEFAULT',
+            'bgColor': '#7fa2ff',
+            'borderColor': 'darken'
+        },
+        {
+            'type': 'ARC_DEFAULT',
+            'color': 'black',
+            'arrowHead': 'triangle,5,5',
+            'labelArrow': 'triangle,3,8',
+            'args': [
+                {
+                    'role': 'arg1',
+                    'targets': [ 'token' ]
+                },
+                {
+                    'role': 'arg2',
+                    'targets': [ 'token' ]
+                }
+            ]
+        },
+        {
+            'type': 'token',
+            'labels': [ '\u00A0\u00A0' ], // non-breaking space for empty
+        },
+        {
+            'type': '-',
+            'labels': [ '\u00A0\u00A0' ], // non-breaking space for empty
+        }
+	],
+  'event_attribute_types': [],
+  'entity_attribute_types': [
+        {
+            'type':   'Name',
+            'values': {
+                'Name' : { 'glyph': '(N)' },
+             },
+         },
+         ],
+	'relation_types': [
+// this is optional
+        ],
+	'event_types': [],
+    };
+
+    var webFontURLs = [
+//        root + 'static/fonts/Astloch-Bold.ttf',
+        root + 'static/fonts/PT_Sans-Caption-Web-Regular.ttf',
+        root + 'static/fonts/Liberation_Sans-Regular.ttf'
+    ];
+
+    /* collection data, not applicable here. */
+    var documentCollections = {};
+
+    head.ready(function() {
+	// performes all embedding and support functions
+	Annodoc.activate(bratCollData, documentCollections);
+    });
+</script>
+
+      <div id="footer">
+          <p class="footer-text">embedded brat &copy; 2010- the <a href="http://brat.nlplab.org/about.html" style="color:gray">brat contributors</a></p>
+      </div>
+    </div>
 
 
 
