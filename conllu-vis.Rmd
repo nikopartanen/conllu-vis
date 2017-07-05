@@ -2,7 +2,11 @@
 title: "Test for visualizing CoNLL-U files"
 author: "Niko Partanen"
 date: "7/5/2017"
-output: html_document
+output:
+  html_document:
+    includes:
+      in_header: header.html
+      after_body: after_body.html
 ---
 
 ```{r setup, include=FALSE}
