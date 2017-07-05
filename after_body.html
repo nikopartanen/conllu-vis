@@ -1,0 +1,23 @@
+<script type="text/javascript">
+  head.js(
+  );
+
+var webFontURLs = [
+  'http://spyysalo.github.io/conllu.js/static/fonts/PT_Sans-Caption-Web-Regular.ttf',
+  'http://spyysalo.github.io/conllu.js/static/fonts/Liberation_Sans-Regular.ttf'
+  ];
+
+/* not used here */
+  var documentCollections = {};
+
+  head.ready(function() {
+    // performes all embedding and support functions
+    Annodoc.activate(Config.bratCollData, documentCollections);
+  });
+  </script>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    Leipzig({ firstLineOrig: true }).gloss();
+  });
+</script>
