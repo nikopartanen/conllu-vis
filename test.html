@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="css/jquery-ui-redmond.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style-vis.css">
+
+    <script type="text/javascript" src="lib/ext/head.load.min.js"></script>
+
+    <!-- External libraries -->
+    <script type="text/javascript" src="lib/ext/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/ext/jquery.svg.min.js"></script>
+    <script type="text/javascript" src="lib/ext/jquery.svgdom.min.js"></script>
+    <script type="text/javascript" src="lib/ext/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="lib/ext/waypoints.min.js"></script>
+
+    <!-- brat helper modules -->
+    <script type="text/javascript" src="lib/brat/configuration.js"></script>
+    <script type="text/javascript" src="lib/brat/util.js"></script>
+    <script type="text/javascript" src="lib/brat/annotation_log.js"></script>
+    <script type="text/javascript" src="lib/ext/webfont.js"></script>
+
+    <!-- brat modules -->
+    <script type="text/javascript" src="lib/brat/dispatcher.js"></script>
+    <script type="text/javascript" src="lib/brat/url_monitor.js"></script>
+    <script type="text/javascript" src="lib/brat/visualizer.js"></script>
+
+    <!-- annotation documentation support -->
+    <script type="text/javascript" src="http://spyysalo.github.io/annodoc/lib/local/annodoc.js"></script>
+    <script type="text/javascript" src="lib/local/config.js"></script>
+
+    <!-- the conllu.js library itself -->
+    <script type="text/javascript" src="conllu.js"</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/0.96/head.min.js"></script>
+
+</head>
+
+<body>
+
+
+<div class="conllu-parse" tabs="yes">
+1	Jäällä	jää	NOUN	N	Case=Ade|Number=Sing	2	nmod
+2	kävely	kävely	NOUN	N	Case=Nom|Number=Sing	3	nsubj
+3	avaa	avata	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root
+4	aina	aina	ADV	Adv	_	3	advmod
+5	hauskoja	hauska	ADJ	A	Case=Par|Degree=Pos|Number=Plur	8	amod
+6	ja	ja	CCONJ	C	_	7	cc
+7	erikoisia	erikoinen	ADJ	A	Case=Par|Degree=Pos|Number=Plur	5	conj
+8	näkökulmia	näkö#kulma	NOUN	N	Case=Par|Number=Plur	3	obj
+9	kaupunkiin	kaupunki	NOUN	N	Case=Ill|Number=Sing	8	nmod
+10	.	.	PUNCT	Punct	_	3	punct
+</div>
+
+</body>
+
+<script type="text/javascript">
+    head.js(
+    );
+
+    var webFontURLs = [
+        'http://spyysalo.github.io/conllu.js/static/fonts/PT_Sans-Caption-Web-Regular.ttf',
+        'http://spyysalo.github.io/conllu.js/static/fonts/Liberation_Sans-Regular.ttf'
+    ];
+
+    /* not used here */
+    var documentCollections = {};
+
+    head.ready(function() {
+	// performes all embedding and support functions
+	Annodoc.activate(Config.bratCollData, documentCollections);
+    });
+</script>
+
+</html>
