@@ -178,20 +178,19 @@ library(tidyverse)</code></pre>
 <pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
 <pre><code>## filter(): dplyr, stats
 ## lag():    dplyr, stats</code></pre>
-<pre class="r"><code>kpv &lt;- read_conll('~/langdoc/kpv-gold/kpv-ud.conllu')
+<pre class="r"><code>kpv &lt;- read_conll('dev_epoch_1.conllu')
 
 kpv %&gt;% 
   mutate(id = stringr::str_trim(id)) %&gt;%
-  filter(id == 'belyx-011.000') %&gt;%
+  filter(id == 'belyx-011.013') %&gt;%
   as_conllu_div() -&gt; kpv_1
 kpv_1</code></pre>
-<div class="conllu-parse" tabs="yes">1	Водз	водз	ADV	_	_	2	advmod
-2	асылын	асыв	NOUN	_	_	3	obl
-3	лэччи	лэччыны	VERB	_	_	0	root
-4	Эжва	Эжва	NOUN	_	_	3	obl
-5	дорӧ	дор	ADP	_	_	4	case
-6	вуграсьны	вуграсьны	VERB	_	_	3	xcomp
-7	.	.	PUNCT	_	_	6	punct
+<div class="conllu-parse" tabs="yes">1	А	а	SCONJ	_	_	5	mark
+2	сэсся	сэсся	ADV	_	_	4	advmod
+3	пыр	пыр	ADV	_	_	4	advmod
+4	отаджыкӧсь	ота	ADJ	_	_	5	advcl
+5	лоисны	лоны	VERB	_	_	0	root
+6	.	.	PUNCT	_	_	5	punct
 </div>
 </div>
 
