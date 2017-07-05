@@ -585,5 +585,18 @@ code.embedded-wrapper,
   border: 2px inset
 }
 a.doclink {
-  text-decoration: none;
+/*   text-decoration: none; */
+}
+a.doclabel {
+  /* doc link with type label as text (#72), style based on .code */
+  line-height: 1.4;
+/*   font: 12px 'Bitstream Vera Sans Mono','Courier',monospace; */
+  font-family: 'Bitstream Vera Sans Mono','Courier',monospace;
+  margin: 0 2px;
+/*   padding: 0 5px; */
+}
+
+.ui-tabs .ui-tabs-nav li { 
+    /* override tab font text */
+    font-size: 90%;
 }

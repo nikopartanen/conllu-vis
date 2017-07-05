@@ -1,0 +1,201 @@
+---
+title: "Discussion on manually annotated and parsed Komi dependencies"
+author: "Niko Partanen"
+date: "7/5/2017"
+output:
+  html_document:
+    includes:
+      after_body: after_body.html
+      in_header: header.html
+    section_divs: FALSE
+    lib_dir: lib
+    self_contained: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+- Manually annotated utterance **is on top**
+- One below comes from our BIST-parser
+- **Both** human and machine generated versions may contain mistakes ;)
+
+Suggestions, improvements and comments can be sent to me in email nikotapiopartanen@gmail.com.
+
+```{r, echo=FALSE, results='asis', warning=FALSE, message=FALSE}
+library(conllr)
+library(tidyverse)
+library(glue)
+
+plot_tree <- function(id, type = 'test'){
+    if (type == 'parser'){
+      filepath = 'dev_epoch_1.conllu'
+    } else {
+      filepath = 'kpv-ud-dev_20.conllu'
+    }
+    kpv <- read_conll(filepath)
+    kpv %>% 
+      mutate(id = stringr::str_trim(id)) %>%
+      filter(id == glue('belyx-011.{id}')) %>%
+      as_conllu_div() -> sentence
+    sentence
+}
+
+```
+
+So what is going on here is that we have been training multilingual dependency parser for Komi and Northern Saami, with the idea that we can use multilingual word embeddings and UD corpora from different languages as our training data. By controlling the training data it is possible to adjust the model. For example, the result drifts quite a lot depending from ratios of Finnish and Russian in a model being 20/80 or 50/50 and so on. Of course Komi is in no way a mixture of Finnish and Russian, but it shares similarities with both of them, in one hand for being a related language, and with Russian there is the long language contact that makes them more similar.
+
+One problem is that there is a possibility that the test data contains mistakes in itself, as I'm not any kind of expert in Universal Dependency style annotations, and had never done anything with them before. Actually reporting errors would be most appreciated.
+
+Good news is that because we have the output files all saved on our server, we can very easily recalculate the scores if there are changes in the evaluation data. I already noticed several mistakes, and I think there are several cases where I have misunderstood the UD annotation model.
+
+## Analysis of sentences
+
+So as explained above, the first one is the ground truth sentence and the second one is generated based on Russian treebanks:
+
+`r plot_tree('013')`
+`r plot_tree('013', 'parser')`
+
+</br>
+
+I don't know why it thinks `А` is of category [mark](http://universaldependencies.org/u/dep/mark.html). Now when I read the description that doesn't even look that wrong actually…
+
+With other example it is obvious that the subject is already encoded wrong in the test data.
+
+`r plot_tree('015')`
+`r plot_tree('015', 'parser')`
+
+</br>
+
+Here is another one which is analysed correctly. The sentence is very simple *[the water] [calmed down]*.
+
+`r plot_tree('016')`
+`r plot_tree('016', 'parser')`
+
+</br>
+
+Here is another one where the analysis is same, the sentence being bit more complex *[the fish][entirely][got quiet]*:
+
+`r plot_tree('017')`
+`r plot_tree('017', 'parser')`
+
+</br>
+
+Here also result is good. The sentence is **[even][the tail][(it) didn't][show]**
+
+`r plot_tree('018')`
+`r plot_tree('018', 'parser')`
+
+</br>
+
+In this case it is absolutely clear that I didn't know very well how to annotate the postpositions, so maybe the Russian model understood those better after all? **Note: compare this kind of situations to some Finnish examples**.
+
+`r plot_tree('020')`
+`r plot_tree('020', 'parser')`
+
+</br>
+
+Also here the question is more if two consecutive adverbs should be linked to one another or directly to the root, as it is in the generated case.
+
+`r plot_tree('022')`
+`r plot_tree('022', 'parser')`
+
+</br>
+
+Here the only mistake is in object not being detected correctly.
+
+`r plot_tree('024')`
+`r plot_tree('024', 'parser')`
+
+</br>
+
+This repeats the same question on adverbs.
+
+`r plot_tree('026')`
+`r plot_tree('026', 'parser')`
+
+</br>
+
+This kind of mistake with objects and obliques we have seen many times already.
+
+`r plot_tree('030')`
+`r plot_tree('030', 'parser')`
+
+</br>
+
+Here is another correctly analysed one:
+
+`r plot_tree('031')`
+`r plot_tree('031', 'parser')`
+
+</br>
+
+This is also correct.
+
+`r plot_tree('032')`
+`r plot_tree('032', 'parser')`
+
+</br>
+
+This was is not correct, but I think the word order is the reason here. Subject is in the very end. `А` is again annotated as `mark`, maybe this is the correct annotation then?
+
+`r plot_tree('033')`
+`r plot_tree('033', 'parser')`
+
+</br>
+
+Here is similar situation as before with advmods after one another. The analysis tries to suggest subject in the beginning, but here the subject is not marked. Are the subjects more compulsory in Russian than Komi? Similarly I wasn't that sure whether we should annotate the verb there as copula or what. Is `aux` or `xcomp` better?
+
+`r plot_tree('035')`
+`r plot_tree('035', 'parser')`
+</br>
+
+Here is a gerund **while it was raining**. Wasn't that sure how to annotate it.
+
+`r plot_tree('037')`
+`r plot_tree('037', 'parser')`
+
+</br>
+
+Here the negation verb is somehow analysed as punctuation? Where this can come from?
+
+`r plot_tree('038')`
+`r plot_tree('038', 'parser')`
+
+</br>
+
+Here is a typo in the test data, рудӧдны should be `xcomp` of кутіс. But it doesn't effect the fact that subject is analysed from in the machine generated output. Is the clause around the subject somehow different from Russian constructions?
+
+`r plot_tree('041')`
+`r plot_tree('041', 'parser')`
+
+</br>
+
+Here are my mistakes with the adverbs, but also the subject is not found correctly.
+
+`r plot_tree('042')`
+`r plot_tree('042', 'parser')`
+
+</br>
+
+This one is also a case where the subject is in the very end. Or can be analyzed so?
+
+`r plot_tree('043')`
+`r plot_tree('043', 'parser')`
+
+</br>
+
+Have to think about this one…
+
+
+`r plot_tree('045')`
+`r plot_tree('045', 'parser')`
+
+</br>
+
+Here also analysis is different. Maybe one thing is that in Russian would never have just one noun alone in a position like this?
+
+`r plot_tree('046')`
+`r plot_tree('046', 'parser')`
