@@ -1,18 +1,95 @@
 <script type="text/javascript">
-  head.js(
-  );
+    // TODO pull this stuff from a more reasonable location
+    var root = 'https://nikopartanen.github.io/conllu-vis/';
+    head.js(
+        // External libraries
+        root + 'lib/ext/jquery.min.js',
+        root + 'lib/ext/jquery.svg.min.js',
+        root + 'lib/ext/jquery.svgdom.min.js',
+        root + 'lib/ext/jquery-ui.min.js',
+        root + 'lib/ext/waypoints.min.js',
 
-var webFontURLs = [
-  'static/fonts/PT_Sans-Caption-Web-Regular.ttf',
-  'static/fonts/Liberation_Sans-Regular.ttf'
-  ];
+        // brat helper modules
+        root + 'lib/brat/configuration.js',
+        root + 'lib/brat/util.js',
+        root + 'lib/brat/annotation_log.js',
+        root + 'lib/ext/webfont.js',
+        // brat modules
+        root + 'lib/brat/dispatcher.js',
+        root + 'lib/brat/url_monitor.js',
+        root + 'lib/brat/visualizer.js',
 
-/* not used here */
-  var documentCollections = {};
+        // embedding support modules
+        'https://nikopartanen.github.io/conllu-vis/lib/local/annodoc.js',
+	root + 'conllu.js'
+	//root + 'lib/local/config.js'
+    );
 
-  head.ready(function() {
-    // performes all embedding and support functions
-    Annodoc.activate(Config.bratCollData, documentCollections);
-  });
-  </script>
-  
+
+    var bratCollData = {
+	'entity_types': [
+// this is optional
+        {
+            'type': 'SPAN_DEFAULT',
+            'bgColor': '#7fa2ff',
+            'borderColor': 'darken'
+        },
+        {
+            'type': 'ARC_DEFAULT',
+            'color': 'black',
+            'arrowHead': 'triangle,5,5',
+            'labelArrow': 'triangle,3,8',
+            'args': [
+                {
+                    'role': 'arg1',
+                    'targets': [ 'token' ]
+                },
+                {
+                    'role': 'arg2',
+                    'targets': [ 'token' ]
+                }
+            ]
+        },
+        {
+            'type': 'token',
+            'labels': [ '\u00A0\u00A0' ], // non-breaking space for empty
+        },
+        {
+            'type': '-',
+            'labels': [ '\u00A0\u00A0' ], // non-breaking space for empty
+        }
+	],
+  'event_attribute_types': [],
+  'entity_attribute_types': [
+        {
+            'type':   'Name',
+            'values': {
+                'Name' : { 'glyph': '(N)' },
+             },
+         },
+         ],
+	'relation_types': [
+// this is optional
+        ],
+	'event_types': [],
+    };
+
+    var webFontURLs = [
+//        root + 'static/fonts/Astloch-Bold.ttf',
+        root + 'static/fonts/PT_Sans-Caption-Web-Regular.ttf',
+        root + 'static/fonts/Liberation_Sans-Regular.ttf'
+    ];
+
+    /* collection data, not applicable here. */
+    var documentCollections = {};
+
+    head.ready(function() {
+	// performes all embedding and support functions
+	Annodoc.activate(bratCollData, documentCollections);
+    });
+</script>
+
+      <div id="footer">
+          <p class="footer-text">embedded brat &copy; 2010- the <a href="http://brat.nlplab.org/about.html" style="color:gray">brat contributors</a></p>
+      </div>
+    </div>
