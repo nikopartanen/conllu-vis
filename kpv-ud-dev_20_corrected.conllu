@@ -6,6 +6,7 @@
 4	отаджыкӧсь	ота	ADJ	_	_	5	obl	_	_
 5	лоисны	лоны	VERB	_	_	0	root	_	_
 6	.	.	PUNCT	_	_	5	punct	_	_
+
 # sent_id = belyx-011.015									
 # text = Кыліс зэв ылысянь муркӧдчӧм шы .									
 1	Кыліс	кывны	VERB	_	_	0	root	_	_
@@ -14,17 +15,20 @@
 4	муркӧдчӧм	муркӧдчыны	VERB	_	_	5	acl	_	_
 5	шы	шы	NOUN	_	_	1	nsubj	_	_
 6	.	.	PUNCT	_	_	1	punct	_	_
+
 # sent_id = belyx-011.016									
 # text = Ваыс лӧнис .									
 1	Ваыс	ва	NOUN	_	_	2	nsubj	_	_
 2	лӧнис	лӧньны	VERB	_	_	0	root	_	_
 3	.	.	PUNCT	_	_	2	punct	_	_
+
 # sent_id = belyx-011.017									
 # text = Чериыд дзикӧдз раммис .									
 1	Чериыд	чери	NOUN	_	_	3	nsubj	_	_
 2	дзикӧдз	дзикӧдз	ADV	_	_	3	advmod	_	_
 3	раммис	раммыны	VERB	_	_	0	root	_	_
 4	.	.	PUNCT	_	_	3	punct	_	_
+
 # sent_id = belyx-011.018									
 # text = Весиг бӧжсӧ эз петкӧдлы .									
 1	Весиг	весиг	ADV	_	_	2	advmod	_	_
@@ -32,6 +36,7 @@
 3	эз	оз	AUX	_	_	4	aux	_	_
 4	петкӧдлы	петкӧдлыны	VERB	_	_	0	root	_	_
 5	.	.	PUNCT	_	_	4	punct	_	_
+
 # sent_id = belyx-011.020									
 # text = Кымӧрыс недыр повзьӧдчӧм бӧрын вешйис бокӧ .									
 1	Кымӧрыс	кымӧр	NOUN	_	_	5	nsubj	_	_
@@ -41,6 +46,7 @@
 5	вешйис	вешйыны	VERB	_	_	0	root	_	_
 6	бокӧ	бокӧ	ADP	_	_	5	obl	_	_
 7	.	.	PUNCT	_	_	6	punct	_	_
+
 # sent_id = belyx-011.022									
 # text = Коркӧ век нин гымалас и зэрас .									
 1	Коркӧ	коркӧ	ADV	_	_	4	advmod	_	_
@@ -50,6 +56,7 @@
 5	и	и	CCONJ	_	_	6	cc	_	_
 6	зэрас	зэрны	VERB	_	_	4	conj	_	_
 7	.	.	PUNCT	_	_	4	punct	_	_
+
 # sent_id = belyx-011.024									
 # text = Ньӧжйӧник чукӧрті чери·кыян·кӧлуйӧс да мӧдӧдчи гортлань .									
 1	Ньӧжйӧник	ньӧжйӧник	ADV	_	_	2	advmod	_	_
@@ -59,6 +66,7 @@
 5	мӧдӧдчи	мӧдӧдчыны	VERB	_	_	2	conj	_	_
 6	гортлань	горт	NOUN	_	_	5	obl	_	_
 7	.	.	PUNCT	_	_	5	punct	_	_
+
 # sent_id = belyx-011.026									
 # text = Сійӧ вочасӧн пыр паськаліс да лӧзӧдіс .									
 1	Сійӧ	сійӧ	PRON	_	_	4	nsubj	_	_
