@@ -2,7 +2,7 @@
 # text = А сэсся пыр отаджыкӧсь лоисны .									
 1	А	а	SCONJ	_	_	2	cc	_	_
 2	сэсся	сэсся	ADV	_	_	5	advmod	_	_
-3	пыр	пыр	ADV	_	_	5	advmod	_	_
+3	пыр	пыр	ADV	_	_	4	advmod	_	_
 4	отаджыкӧсь	ота	ADJ	_	_	5	obl	_	_
 5	лоисны	лоны	VERB	_	_	0	root	_	_
 6	.	.	PUNCT	_	_	5	punct	_	_
